@@ -1,24 +1,29 @@
-import logo from './logo.svg';
+
 import './App.css';
+import {BrowserRouter as Router,Routes,Route, Navigate} from "react-router-dom"
+import Login from './Components/Login';
+import SignUp from './Components/SignUp';
+import Navbar from './Components/Navbar';
+import Home from './Components/Home';
+import Footer from './Components/Footer';
+import ForgotPasswod from './Components/ForgotPasswod';
 
 function App() {
+  const login=localStorage.getItem("login")
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+  <Navbar/>
+   <Router>
+     <Routes>
+
+       <Route  path="/home" element={<Home/>}  />
+       <Route  path="/"  element={login === true ? <Navigate to="/home"/> : <Login />}/>
+       <Route  path="/signup" element={<SignUp/>}/>
+       <Route  path="/forget-password" element={<ForgotPasswod/>}/>
+     </Routes>
+   </Router>
+   <Footer/>
+   </>
   );
 }
 
